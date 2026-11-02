@@ -44,6 +44,37 @@
       </div>
     </section>
 
+    <!-- SAVINGS ESTIMATOR -->
+    <section class="section savings" id="savings">
+      <div class="container savings__inner">
+        <div class="description description--center">
+          <span class="tag"><img src="assets/icon-subheading-a.svg" alt="" width="22" height="17">Savings Estimator</span>
+          <h2>Estimate your <em>savings</em></h2>
+          <p class="text">Move the slider to see what a typical energy efficiency project could save your business.</p>
+        </div>
+
+        <div class="calc">
+          <div class="calc__head">
+            <label for="bill">Monthly electricity bill</label>
+            <output id="bill-out" for="bill">150,000 EGP</output>
+          </div>
+          <input class="calc__range" id="bill" type="range" min="10000" max="1000000" step="10000" value="150000">
+          <div class="calc__results">
+            <div class="calc__result">
+              <strong id="save-year">540,000 EGP</strong>
+              <span>saved per year</span>
+            </div>
+            <div class="calc__result">
+              <strong id="save-decade">5,400,000 EGP</strong>
+              <span>saved over 10 years</span>
+            </div>
+          </div>
+          <p class="calc__note">Illustrative estimate assuming about a 30% cut in your bill. A full assessment gives your real figures.</p>
+          <a href="#contact" class="btn btn--green">Request an assessment</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ABOUT US -->
     <section class="section about" id="about">
       <div class="container split">
@@ -87,16 +118,32 @@
             <h2><em>Helping</em> our clients reduce their energy consumption, costs, and environmental impact</h2>
           </div>
 
-          <div class="offer-list">
-            <h3>We offer a wide range of services, including:</h3>
-            <ul>
-              <li><img src="assets/check.svg" alt="" width="20" height="20">Energy Development &amp; Financing Services</li>
-              <li><img src="assets/check.svg" alt="" width="20" height="20">Sustainability &amp; ESG</li>
-              <li><img src="assets/check.svg" alt="" width="20" height="20">Energy Efficiency Consultancy and Technology Implementation</li>
-            </ul>
+          <div class="services">
+            <p class="services__lead">Three services that take a project from idea to a package lenders can evaluate.</p>
+            <article class="service">
+              <span class="service__num">1</span>
+              <div>
+                <h3>Origination</h3>
+                <p>We identify and register solar and efficiency projects from businesses, developers and installers across Egypt.</p>
+              </div>
+            </article>
+            <article class="service">
+              <span class="service__num">2</span>
+              <div>
+                <h3>Assessment</h3>
+                <p>Technical, energy and financial review of your site, with ROI and payback, plus ESG risk screening.</p>
+              </div>
+            </article>
+            <article class="service">
+              <span class="service__num">3</span>
+              <div>
+                <h3>Structuring</h3>
+                <p>We shape the project into a clear investment package with the documents and metrics lenders ask for.</p>
+              </div>
+            </article>
           </div>
 
-          <a href="#" class="btn btn--green">Learn about GreenMe Services</a>
+          <a href="#contact" class="btn btn--green">Request an assessment</a>
         </div>
 
         <div class="what__grid">
@@ -233,5 +280,20 @@
     </div>
   </footer>
 
+  <script>
+    (function () {
+      var r = document.getElementById('bill');
+      var fmt = function (n) { return Math.round(n).toLocaleString('en-US') + ' EGP'; };
+      function update() {
+        var bill = +r.value, year = bill * 0.3 * 12;
+        document.getElementById('bill-out').textContent = fmt(bill);
+        document.getElementById('save-year').textContent = fmt(year);
+        document.getElementById('save-decade').textContent = fmt(year * 10);
+        r.style.setProperty('--fill', ((bill - r.min) / (r.max - r.min) * 100) + '%');
+      }
+      r.addEventListener('input', update);
+      update();
+    })();
+  </script>
 </body>
 </html>
